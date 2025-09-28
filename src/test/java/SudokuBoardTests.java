@@ -1,10 +1,8 @@
-import org.example.board.SudokuParser;
 import org.example.board.*;
-import org.example.common.Result;
+import org.example.board.cells.CellPosition;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
 public class SudokuBoardTests {
@@ -26,9 +24,9 @@ public class SudokuBoardTests {
                 | 3 4 5 | 2 8 6 | 1 7 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
 
-        final String result = SudokuParser.toString(board);
+        final String result = SudokuBoardParser.toString(board);
 
         assertThat(input).isEqualTo(result);
     }
@@ -50,7 +48,7 @@ public class SudokuBoardTests {
                 | 3 4 5 | 2 8 6 | 1 7 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
 
         boolean result = board.isValid();
 
@@ -74,7 +72,7 @@ public class SudokuBoardTests {
                 | 3 4 5 | 2 8 6 | 1 7 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
 
         boolean result = board.isValid();
 
@@ -98,7 +96,7 @@ public class SudokuBoardTests {
                 | 3 4 5 | 2 8 6 | 1 7 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
 
         boolean result = board.isValid();
 
@@ -122,7 +120,7 @@ public class SudokuBoardTests {
                 | 3 _ 5 | 2 8 6 | 1 7 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
 
         boolean result = board.isValid();
 
@@ -146,7 +144,7 @@ public class SudokuBoardTests {
                 | 3 _ _ | 2 5 6 | 1 7 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
 
         boolean result = board.isValid();
 
@@ -171,7 +169,7 @@ public class SudokuBoardTests {
                 -------------------------
                 """;
 
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
         final var cellPosition = new CellPosition(4, 7);
 
         final CellPosition result = board.findBlockStartingPosition(cellPosition);
@@ -211,12 +209,12 @@ public class SudokuBoardTests {
                 | 3 4 5 | 2 8 6 | 1 7 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
         final var sudokuSolver = new Solver(board);
 
         final SudokuBoard solved = sudokuSolver.solve().orElseThrow();
 
-        assertThat(SudokuParser.toString(solved)).isEqualTo(output);
+        assertThat(SudokuBoardParser.toString(solved)).isEqualTo(output);
     }
 
 
@@ -253,12 +251,12 @@ public class SudokuBoardTests {
                 | 5 8 7 | 1 3 2 | 4 6 9 |
                 -------------------------
                 """;
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
         final var sudokuSolver = new Solver(board);
 
         final SudokuBoard solved = sudokuSolver.solve().orElseThrow();
 
-        assertThat(SudokuParser.toString(solved)).isEqualTo(output);
+        assertThat(SudokuBoardParser.toString(solved)).isEqualTo(output);
     }
 
     @Test
@@ -294,12 +292,12 @@ public class SudokuBoardTests {
                 -------------------------
                 """;
 
-        final SudokuBoard board = SudokuParser.tryParse(input).orElseThrow();
+        final SudokuBoard board = SudokuBoardParser.tryParse(input).orElseThrow();
         final var sudokuSolver = new Solver(board);
 
         final SudokuBoard solved = sudokuSolver.solve().orElseThrow();
 
-        assertThat(SudokuParser.toString(solved)).isEqualTo(output);
+        assertThat(SudokuBoardParser.toString(solved)).isEqualTo(output);
     }
 }
 

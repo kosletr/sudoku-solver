@@ -1,6 +1,4 @@
-package org.example.board;
-
-import org.example.common.Result;
+package org.example.board.cells;
 
 import java.util.Objects;
 
@@ -8,19 +6,12 @@ public record CellValue(String value) {
     private static final String EMPTY_CELL_VALUE = "_";
 
     public CellValue {
-        Objects.requireNonNull(value);
-        if (!CellValue.canCreate(value))
+        if (!CellValue.canCreate(Objects.requireNonNull(value)))
             throw new IllegalArgumentException("Invalid cell value: " + value);
     }
 
-    public static Result<CellValue> tryCreate(String v) {
-        return CellValue.canCreate(v)
-                ? new Result.Success<>(new CellValue(v))
-                : new Result.Error<>("Invalid cell value: " + v);
-    }
-
     private static boolean canCreate(String v) {
-        return isEmpty(v) || isBetween1And9(v);
+        return CellValue.isEmpty(v) || CellValue.isBetween1And9(v);
     }
 
     public boolean isEmpty() {

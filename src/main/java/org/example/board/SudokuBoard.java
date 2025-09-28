@@ -1,5 +1,7 @@
 package org.example.board;
 
+import org.example.board.cells.CellPosition;
+import org.example.board.cells.CellValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,14 +11,13 @@ public final class SudokuBoard {
     private final CellValue[][] cells;
 
     SudokuBoard(CellValue[][] cells) {
-        Objects.requireNonNull(cells);
-        if (!this.is9by9(cells))
+        if (!this.is9by9(Objects.requireNonNull(cells)))
             throw new IllegalArgumentException("Sudoku board dimensions must be 9x9");
         this.cells = cells;
     }
 
     private SudokuBoard(SudokuBoard other) {
-        var cells = new CellValue[9][9];
+        final var cells = new CellValue[9][9];
         for (int r = 0; r < 9; r++)
             for (int c = 0; c < 9; c++)
                 cells[r][c] = other.at(new CellPosition(r, c));
@@ -24,11 +25,12 @@ public final class SudokuBoard {
     }
 
     private boolean is9by9(CellValue[][] cells) {
-        return cells.length == 9 && Arrays.stream(cells).allMatch(row -> row != null && row.length == 9);
+        return cells.length == 9 && Arrays.stream(cells)
+                .allMatch(row -> Objects.requireNonNull(row).length == 9);
     }
 
     public SudokuBoard withChanged(CellPosition position, CellValue newValue) {
-        SudokuBoard newBoard = new SudokuBoard(this);
+        final SudokuBoard newBoard = new SudokuBoard(this);
         newBoard.cells[position.row()][position.column()] = newValue;
         return newBoard;
     }

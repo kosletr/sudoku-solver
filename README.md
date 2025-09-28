@@ -31,7 +31,7 @@ To make this project interesting and challenging:
 ## Usage
 
 ### Run the Demo
-The entry point is `Main.main()`, which:
+The entry point is in the `Main` class, which:
 1. Prints the original puzzle.
 2. Parses it into a `SudokuBoard`.
 3. Attempts to solve it.
@@ -100,6 +100,6 @@ Solved:
 ---
 
 ## Requirements
-- Java 17+ (Java 25 was used in development)
+- Java 25
 - Maven
 - No external dependencies

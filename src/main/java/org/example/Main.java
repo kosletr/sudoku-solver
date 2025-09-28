@@ -2,11 +2,11 @@ package org.example;
 
 import org.example.board.SudokuBoard;
 import org.example.board.Solver;
-import org.example.board.SudokuParser;
+import org.example.board.SudokuBoardParser;
 import org.example.common.Result;
 
 public class Main {
-   static void main() {
+   void main() {
        final String input = """
          -------------------------
          | 1 9 _ | _ _ _ | 7 _ _ |
@@ -26,13 +26,12 @@ public class Main {
        System.out.println("Original:");
        System.out.println(input);
 
-       final SudokuBoard original = SudokuParser.tryParse(input).orElseThrow();
-       final var sudokuSolver = new Solver(original);
-       final Result<SudokuBoard> result = sudokuSolver.solve();
+       final SudokuBoard original = SudokuBoardParser.tryParse(input).orElseThrow();
+       final Result<SudokuBoard> result = new Solver(original).solve();
 
        System.out.println();
        switch (result) {
-           case Result.Success (SudokuBoard solved) -> System.out.println("Solved:\n" + SudokuParser.toString(solved));
+           case Result.Success (SudokuBoard solved) -> System.out.println("Solved:\n" + SudokuBoardParser.toString(solved));
            case Result.Error (String message) -> System.out.println(message);
        }
    }

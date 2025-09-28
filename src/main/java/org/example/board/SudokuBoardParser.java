@@ -1,19 +1,18 @@
 package org.example.board;
 
+import org.example.board.cells.CellValue;
 import org.example.common.Result;
-
 import java.util.Arrays;
 import java.util.Objects;
 
-public final class SudokuParser {
+public final class SudokuBoardParser {
     private static final String TOP_BOTTOM_BORDER = "-------------------------";
     private static final String     MIDDLE_BORDER = "|-------+-------+-------|";
 
-    private SudokuParser() {}
+    private SudokuBoardParser() {}
 
     public static Result<SudokuBoard> tryParse(String input) {
-        Objects.requireNonNull(input);
-        final String[] rows = input.split("\\R");
+        final String[] rows = Objects.requireNonNull(input).split("\\R");
         if (rows.length - 4 != 9) return new Result.Error<>("Invalid number of rows: " + rows.length);
 
         final var cells = new CellValue[9][9];
@@ -32,8 +31,7 @@ public final class SudokuParser {
     }
 
     public static String toString(SudokuBoard board) {
-        Objects.requireNonNull(board);
-        final CellValue[][] cells = board.getCells();
+        final CellValue[][] cells = Objects.requireNonNull(board).getCells();
         var output = new StringBuilder(TOP_BOTTOM_BORDER).append("\n");
         for (int r = 0; r < 9; r++) {
             if (r != 0 && r % 3 == 0) output.append(MIDDLE_BORDER).append("\n");

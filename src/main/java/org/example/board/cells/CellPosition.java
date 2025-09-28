@@ -1,4 +1,4 @@
-package org.example.board;
+package org.example.board.cells;
 
 public record CellPosition(int row, int column) {
     public CellPosition {
