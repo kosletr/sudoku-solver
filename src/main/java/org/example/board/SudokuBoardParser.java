@@ -27,7 +27,10 @@ public final class SudokuBoardParser {
                 return new Result.Error<>("Invalid number of cells: " + rowCells.length + ", in the " + (r + 1) + " row");
             cells[r++] = rowCells;
         }
-        return new Result.Success<>(new SudokuBoard(cells));
+        final var board = new SudokuBoard(cells);
+        return board.isValid()
+                ? new Result.Success<>(board)
+                : new Result.Error<>("One or more cell(s) are duplicate");
     }
 
     public static String toString(SudokuBoard board) {
